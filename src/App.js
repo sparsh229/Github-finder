@@ -1,16 +1,15 @@
 import "./App.css";
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import Navbar from "./Component/Layout/Navbar";
-import Useritem from "./Component/Users/Useritem";
-class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Navbar title="Github-finder" icon="fab fa-github" />
-        <Useritem />
-      </Fragment>
-    );
-  }
-}
-
+import Users from "./Component/Users/Users";
+const App = () => {
+  return (
+    <Fragment>
+      <Navbar />
+      <div className="container">
+        <Users />
+      </div>
+    </Fragment>
+  );
+};
 export default App;
