@@ -7,9 +7,12 @@ import Search from "./Component/Users/Search";
 import axios from "axios";
 import Alert from "./Component/Layout/Alert";
 import About from "./Component/Pages/About";
+import User from "./Component/Users/User";
 class App extends Component {
   state = {
     users: [],
+    user: {},
+    repos: [],
     loading: false,
     alert: null,
   };
@@ -21,20 +24,37 @@ class App extends Component {
     );
     this.setState({ users: res.data.items, loading: false });
   };
-  // for clearing users
 
+  //get user
+  getUser = async (username) => {
+    this.setState({ loading: true });
+    const res = await axios.get(
+      `https://api.github.com/users/${username}?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`
+    );
+    this.setState({ user: res.data, loading: false });
+  };
+
+  //get user repos
+  getUserRepos = async (username) => {
+    this.setState({ loading: true });
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`
+    );
+    this.setState({ repos: res.data, loading: false });
+  };
+
+  // for clearing users
   clearUsers = () => {
     this.setState({ users: [], loading: false });
   };
 
   // set alert
-
   setAlert = (msg, type) => {
     this.setState({ alert: { msg, type } });
     setTimeout(() => this.setState({ alert: null }), 3000);
   };
   render() {
-    const { users, loading } = this.state;
+    const { users, user, repos, loading } = this.state;
     return (
       <Router>
         <div className="App">
@@ -58,6 +78,22 @@ class App extends Component {
                 )}
               />
               <Route exact path="/about" component={About} />
+              <Route
+                exact
+                path="/user/:login"
+                render={(props) => (
+                  <Fragment>
+                    <User
+                      {...props}
+                      getUser={this.getUser}
+                      getUserRepos={this.getUserRepos}
+                      user={user}
+                      repos={repos}
+                      loading={loading}
+                    />
+                  </Fragment>
+                )}
+              />
             </Switch>
           </div>
         </div>
