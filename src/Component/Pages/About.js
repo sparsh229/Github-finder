@@ -5,7 +5,7 @@ export const About = () => {
     <Fragment>
       <h1>About this app</h1>
       <p>App to search Github Users</p>
-      <p>Version : 1.0.0</p>
+      <p>Version : 1.0.1</p>
     </Fragment>
   );
 };

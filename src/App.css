@@ -19,7 +19,8 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background-color: #00e5ed;
+  background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
   color: #333;
 }
 
@@ -249,7 +250,7 @@ img {
 .bg-primary,
 .badge-primary,
 .alert-primary {
-  background: var(--primary-color);
+  background: #005a8d;
   color: #fff;
 }
 

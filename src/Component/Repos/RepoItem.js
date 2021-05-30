@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 const RepoItem = ({ repo }) => {
   return (
     <div className="card">
-      {repo.fork && <i class="fas fa-code-branch"></i>}
+      {repo.fork && (
+        <div>
+          {" "}
+          <i class="fas fa-code-branch"></i> <strong>forked</strong>{" "}
+        </div>
+      )}
       <h3>
         <a href={repo.html_url}>{repo.name}</a>
       </h3>
